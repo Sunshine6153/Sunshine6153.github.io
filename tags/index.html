@@ -44,6 +44,29 @@
 
 <link rel="stylesheet" href="/css/main.css" />
 
+    <style>
+        /* 新增：一言容器的CSS样式 */
+        #hitokoto {
+            text-align: center;
+            margin: 2rem 0 1rem 0;
+            padding: 1.5rem;
+            font-size: 1.1rem;
+            color: #666;
+            border-top: 1px dashed rgba(0,0,0,0.1);
+            border-bottom: 1px dashed rgba(0,0,0,0.1);
+            background: rgba(250,250,250,0.5);
+            border-radius: 8px;
+        }
+        #hitokoto a {
+            font-style: italic;
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s;
+        }
+        #hitokoto a:hover {
+            color: #333;
+        }
+    </style>
 <meta name="generator" content="Hexo 7.3.0"></head>
 <body>
     <!-- 鼠标点击特效 -->
@@ -158,11 +181,6 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <!-- 标题下方的一言展示区 -->
-            <div id="hitokoto" style="text-align: center; margin: 1rem 0; font-size: 1.1rem; color: #666;">
-                <a href="#" id="hitokoto_text" style="font-style: italic; text-decoration: none;">:D 获取中...</a>
-            </div>
-
             <div id="archives">
     
     <div class="categories-tags">
@@ -181,7 +199,7 @@
         
         
         <span>
-            <a href="/tags/%E5%85%AC%E5%91%8A/" style="background: #ff7d73">
+            <a href="/tags/%E5%85%AC%E5%91%8A/" style="background: #03a9f4">
                 <span class="icon">
                     <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
@@ -193,6 +211,12 @@
     </div>
     
 </div>
+
+
+            <!-- 一言展示区（页脚上方） -->
+            <div id="hitokoto">
+                <a href="#" id="hitokoto_text">:D 加载中...</a>
+            </div>
 
             <footer id="footer">
     <div id="footer-wrap">
@@ -222,20 +246,46 @@
         
     </div>
 
-    <!-- 一言API调用脚本 -->
+    <!-- 一言API脚本 -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            fetch('https://v1.hitokoto.cn/?c=a')
+        document.addEventListener('DOMContentLoaded', function() {
+            const hitokotoEl = document.getElementById('hitokoto_text');
+            
+            // 从缓存读取一言（如果有）
+            const cachedHitokoto = localStorage.getItem('hitokoto');
+            const cacheTime = localStorage.getItem('hitokoto_time');
+            
+            // 如果缓存存在且未过期（1小时）
+            if (cachedHitokoto && cacheTime && Date.now() - cacheTime < 3600000) {
+                try {
+                    const data = JSON.parse(cachedHitokoto);
+                    updateHitokoto(data);
+                    return;
+                } catch (e) {
+                    console.log('缓存解析失败，重新获取');
+                }
+            }
+            
+            // 从API获取新的一言
+            fetch('https://v1.hitokoto.cn/?c=a&encode=json&charset=utf-8')
                 .then(response => response.json())
                 .then(data => {
-                    const hitokoto = document.querySelector('#hitokoto_text');
-                    hitokoto.href = `https://hitokoto.cn/?uuid=${data.uuid}`;
-                    hitokoto.innerText = data.hitokoto;
+                    updateHitokoto(data);
+                    // 缓存到本地
+                    localStorage.setItem('hitokoto', JSON.stringify(data));
+                    localStorage.setItem('hitokoto_time', Date.now());
                 })
                 .catch(error => {
                     console.error('获取一言失败:', error);
-                    document.querySelector('#hitokoto_text').innerText = '一言加载失败，但内容依然精彩~';
+                    hitokotoEl.innerText = '「生活就像海洋，只有意志坚强的人才能到达彼岸」';
                 });
+                
+            function updateHitokoto(data) {
+                hitokotoEl.href = `https://hitokoto.cn/?uuid=${data.uuid}`;
+                let text = data.hitokoto;
+                if (data.from) text += ' —— ' + data.from;
+                hitokotoEl.innerText = text;
+            }
         });
     </script>
 
