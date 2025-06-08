@@ -52,30 +52,12 @@
 <body>
     <!-- 鼠标点击特效 -->
     <canvas
-    id="fireworks"
-    style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"
+        id="fireworks"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"
     ></canvas>
     <script src="https://s4.zstatic.net/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="/js/fireworks.min.js"></script>
-    <!-- 一言（Hitokoto） -->
-<div id="hitokoto">
-    <a href="#" id="hitokoto_text">:D 获取中...</a>
-</div>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        fetch('https://v1.hitokoto.cn/?c=a')
-            .then(response => response.json())
-            .then(data => {
-                const hitokoto = document.querySelector('#hitokoto_text');
-                hitokoto.href = `https://hitokoto.cn/?uuid=${data.uuid}`;
-                hitokoto.innerText = data.hitokoto;
-            })
-            .catch(error => {
-                console.error('获取一言失败:', error);
-                document.querySelector('#hitokoto_text').innerText = '获取一言失败，请稍后再试';
-            });
-    });
-</script>
+
     <div id="layout">
         <transition name="fade">
             <div id="loading" v-show="loading">
@@ -180,6 +162,11 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <!-- 标题下方的一言展示区 -->
+            <div id="hitokoto" style="text-align: center; margin: 1rem 0; font-size: 1.1rem; color: #666;">
+                <a href="#" id="hitokoto_text" style="font-style: italic; text-decoration: none;">:D 获取中...</a>
+            </div>
+
             <div class="article">
     <div>
         <h1>about Sunshine</h1>
@@ -235,8 +222,27 @@
         </transition>
         
     </div>
+
+    <!-- 一言API调用脚本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('https://v1.hitokoto.cn/?c=a')
+                .then(response => response.json())
+                .then(data => {
+                    const hitokoto = document.querySelector('#hitokoto_text');
+                    hitokoto.href = `https://hitokoto.cn/?uuid=${data.uuid}`;
+                    hitokoto.innerText = data.hitokoto;
+                })
+                .catch(error => {
+                    console.error('获取一言失败:', error);
+                    document.querySelector('#hitokoto_text').innerText = '一言加载失败，但内容依然精彩~';
+                });
+        });
+    </script>
+
     <script src="/js/main.js"></script>
-    <!-- giscus -->
+    <!-- giscus评论系统 -->
+    
     <script src="https://giscus.app/client.js"
         data-repo="Sunshine6153/blog-giscus"
         data-repo-id="R_kgDOO3-z1g"
@@ -252,12 +258,6 @@
         crossorigin="anonymous"
         async>
     </script>
-    
-    
-
-
-
-
     
 </body>
 </html>
