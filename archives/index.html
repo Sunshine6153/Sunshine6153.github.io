@@ -53,8 +53,25 @@
     ></canvas>
     <script src="https://s4.zstatic.net/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="/js/fireworks.min.js"></script>
-    <!-- 背景特效 -->
-
+    <!-- 一言（Hitokoto） -->
+<div id="hitokoto">
+    <a href="#" id="hitokoto_text">:D 获取中...</a>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        fetch('https://v1.hitokoto.cn/?c=a')
+            .then(response => response.json())
+            .then(data => {
+                const hitokoto = document.querySelector('#hitokoto_text');
+                hitokoto.href = `https://hitokoto.cn/?uuid=${data.uuid}`;
+                hitokoto.innerText = data.hitokoto;
+            })
+            .catch(error => {
+                console.error('获取一言失败:', error);
+                document.querySelector('#hitokoto_text').innerText = '获取一言失败，请稍后再试';
+            });
+    });
+</script>
     <div id="layout">
         <transition name="fade">
             <div id="loading" v-show="loading">
@@ -196,7 +213,7 @@
                         
                         <span class="tag">
                             
-                            <a href="/tags/%E5%85%AC%E5%91%8A/" style="color: #ffa2c4">
+                            <a href="/tags/%E5%85%AC%E5%91%8A/" style="color: #ff7d73">
                                 公告
                             </a>
                         </span>
@@ -225,7 +242,7 @@
                         
                         <span class="tag">
                             
-                            <a href="/tags/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/" style="color: #03a9f4">
+                            <a href="/tags/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/" style="color: #ffa2c4">
                                 更新日志
                             </a>
                         </span>
