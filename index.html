@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <title>天童爱丽丝.top</title>
     <meta name="author" content="Sunshine" />
-    <meta name="description" content="一个初入计算机领域的二次元人士的个人小天地" />
+    <meta name="description" content="一个初入计算机领域的二次元人士の小窝" />
     <meta name="keywords" content="" />
     <meta
         name="viewport"
@@ -198,7 +198,7 @@
             <div class="wrap">
                 <h1>天童爱丽丝.top</h1>
                 <h3>Sunshine鼠鼠的博客</h3>
-                <h5>一个初入计算机领域的二次元人士的个人小天地</h5>
+                <h5>一个初入计算机领域的二次元人士の小窝</h5>
             </div>
         </span>
     </div>
@@ -404,7 +404,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/" style="color: #ffa2c4">更新日志</a>
+            <a href="/tags/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/" style="color: #00a596">更新日志</a>
         </span>
         
     </div>
@@ -444,7 +444,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%85%AC%E5%91%8A/" style="color: #ffa2c4">公告</a>
+            <a href="/tags/%E5%85%AC%E5%91%8A/" style="color: #ff7d73">公告</a>
         </span>
         
     </div>
@@ -586,7 +586,7 @@
             const cacheTime = localStorage.getItem('hitokoto_time');
             
             // 如果缓存存在且未过期（1小时）
-            if (cachedHitokoto && cacheTime && Date.now() - cacheTime < 3600000) {
+            if (cachedHitokoto && cacheTime && Date.now() - cacheTime < 60000) {
                 try {
                     const data = JSON.parse(cachedHitokoto);
                     updateHitokoto(data);
