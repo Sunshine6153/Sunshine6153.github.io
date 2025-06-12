@@ -265,7 +265,7 @@
             const cachedHitokoto = localStorage.getItem('hitokoto');
             const cacheTime = localStorage.getItem('hitokoto_time');
             
-            // 如果缓存存在且未过期（1小时）
+            // 如果缓存存在且未过期（1分钟）
             if (cachedHitokoto && cacheTime && Date.now() - cacheTime < 60000) {
                 try {
                     const data = JSON.parse(cachedHitokoto);

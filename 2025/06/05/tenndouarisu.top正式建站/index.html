@@ -206,7 +206,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E5%85%AC%E5%91%8A/" style="color: #ffa2c4">
+                <a href="/tags/%E5%85%AC%E5%91%8A/" style="color: #00a596">
                     公告
                 </a>
             </span>
@@ -271,7 +271,7 @@
             const cachedHitokoto = localStorage.getItem('hitokoto');
             const cacheTime = localStorage.getItem('hitokoto_time');
             
-            // 如果缓存存在且未过期（1小时）
+            // 如果缓存存在且未过期（1分钟）
             if (cachedHitokoto && cacheTime && Date.now() - cacheTime < 60000) {
                 try {
                     const data = JSON.parse(cachedHitokoto);
