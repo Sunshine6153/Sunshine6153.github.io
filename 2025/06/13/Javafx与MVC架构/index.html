@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>Categories: 计算机相关 | 天童爱丽丝.top</title>
+    <title>Javafx与MVC架构 | 天童爱丽丝.top</title>
     <meta name="author" content="Sunshine" />
     <meta name="description" content="一个初入计算机领域的二次元人士の小窝" />
     <meta name="keywords" content="" />
@@ -37,6 +37,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -181,59 +185,46 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="archives">
-    
-    <div class="categories-tags">
-        
-        
-        
-        <span>
-            <a href="/categories/%E4%BA%8C%E6%AC%A1%E5%85%83%E5%8F%91%E7%94%B5/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                二次元发电
-            </a>
+            <div class="article">
+    <div>
+        <h1>Javafx与MVC架构</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/6/13
         </span>
         
         
-        
-        <span>
-            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9B%B8%E5%85%B3/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                计算机相关
-            </a>
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9B%B8%E5%85%B3/" style="color: #ffa2c4">
+                    计算机相关
+                </a>
+            </span>
+            
         </span>
-        
-        
-        
         
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2025/6/6</div>
-            <a href="/2025/06/06/Java%E6%80%9D%E8%80%831/">
-                <h3>Java思考1</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9B%B8%E5%85%B3/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        计算机相关
-                    </a>
-                </span>
-                
-                
-            </div>
-        </div>
+    <div class="content" v-pre>
+        <p>大作业的基本内容我终于堂堂完成啦！并且我学会将相关代码传送到github库里<br>（虽然最开始不小心传到网站的库里去了，悲）<br>本次大作业建设公众污染反馈系统的网格员端，使用了javafx和MVC架构。<br>Mvc架构分为 View、Controller、Module三个结构，结构简单而分明，适合我这种构建系统初学者，<br>就像两个村子和中间一条大马路。<br>View（视图）为前端，展示数据和用户界面。<br>Model（模型）为后端，用于处理数据和部分简单的业务逻辑。<br>Controller（控制器）是两者之间的桥梁，负责处理前端的请求，同时我在里面也处理输入数据，所以感觉偏向后端，也是手敲代码最多的地方。<br>同时记得也要搞个common包装着封装好的类（一段处理数据的代码反复出现就要考虑封装），能有效减少工作量，也让这个系统更健壮、更易维护。<br>为什么使用javafx？<br>javafx支持 FXML：类似 HTML 的 UI 描述语言，支持界面与逻辑分离，来构造UIUI。（也支持CSS）<br>javafx自带按钮、表格（TableView）、图表（Chart）、媒体播放器等控件,比较轮椅？<br>javaFX 完全使用 Java 编写，我能直接使用，面向对象编程更自然。<br>javafx与 MVC 结构天然适配（但是我也不是很懂为什么）喵</p>
+
     </div>
+    
+    
+    
+    
+    
+    
     
 </div>
 
@@ -316,6 +307,22 @@
 
     <script src="/js/main.js"></script>
     <!-- giscus评论系统 -->
+    
+    <script src="https://giscus.app/client.js"
+        data-repo="Sunshine6153/blog-giscus"
+        data-repo-id="R_kgDOO3-z1g"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOO3-z1s4CrLm3"
+        data-mapping="pathname"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+    </script>
     
 </body>
 </html>
