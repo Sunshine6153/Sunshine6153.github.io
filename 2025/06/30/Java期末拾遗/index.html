@@ -206,7 +206,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9B%B8%E5%85%B3/" style="color: #00a596">
+                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9B%B8%E5%85%B3/" style="color: #ffa2c4">
                     计算机相关
                 </a>
             </span>
@@ -217,7 +217,40 @@
     
     <div class="content" v-pre>
         <p>哎哟，又到期末了，java有一些细碎知识还不会，<br>故在此收集并记录，我在期末拾来的java知识。</p>
-<p>1.传值和传址，Java与C<br>传值和传址<br>传值和传值的区别是什么？<br>假如现在你电脑桌面有个word文档，传值就是你把这文档创建了一个副本，<br>然后你是原封不动的把这个文档提交了，或是把它修改了，都跟你最初的文档一点关系没有。<br>然后传址就是你把原文件改了。<br>对于C&#x2F;C++,我们可以真正传递地址（指针），通过指针修改原始变量。<br>而对于Java，Jesus Crime!<br>我们无法修改基本变量的值！</p>
+<p>1.传值和传址，Java与C<br>传值和传址<br>传值和传值的区别是什么？<br>假如现在你电脑桌面有个word文档，传值就是你把这文档创建了一个副本，<br>然后你是原封不动的把这个文档提交了，或是把它修改了，都跟你最初的文档一点关系没有。<br>然后传址就是你把原文件改了。<br>对于C&#x2F;C++,我们可以真正传递地址（指针），通过指针修改原始变量。<br>而对于Java，Jesus Crime!<br>我们无法修改基本变量的值！<br>Java 中所有参数传递本质上是值传递，但分两种情况：<br>对于基本类型（int, double 等），传的是值的副本，对值无法改变</p>
+<pre><code class="language-java">public class Main &#123;
+    public static void main(String[] args) &#123;
+        int x = 10;
+        change(x);
+        System.out.println(x);  // 输出仍是 10
+    &#125;
+
+    static void change(int val) &#123;
+        val = 20;  // 改的是 val 的副本
+    &#125;
+&#125;
+</code></pre>
+<p>x 的值没有变，因为change（）只是把 x 的副本传进去了，这个change()只是自欺欺人罢了。<br>但是对于对象和数组，虽然值传递的“祖宗章程”没变，但是情况有变。<br>如果是对象或是数组，传的是“引用的副本”，即拷贝了一份引用数据的地址，通过改变引用数据的地址可以改对象内部。</p>
+<pre><code class="language-java">class Person &#123;
+    String name;
+&#125;
+
+public class Demo &#123;
+    public static void change(Person p) &#123;
+        p.name = &quot;Alice&quot;;   // 改变对象内容 ✅
+        p = new Person();   // 改变引用本身 ❌（不会影响原来的 p）
+        p.name = &quot;Sunshine&quot;;     // 改变的是新对象
+    &#125;
+
+    public static void main(String[] args) &#123;
+        Person p1 = new Person();
+        p1.name = &quot;Tom&quot;;
+        change(p1);
+        System.out.println(p1.name); // 输出是 Alice
+    &#125;
+&#125;
+</code></pre>
+<p>引用数据类型存储的是“对象的地址”（引用）。<br>在这个例子里面，name原来引用Tom的地址，使得p1的name对应为Tom。<br>然后再change()函数里面，将引用的数据改为“Alice”，将新的ALice的地址给name引用，从而改变了对象的内容。<br>但是下一步尝试将新对象赋给p，实际只是创建了一个p的副本，让这个副本指向了一个新的对象，<br>原来p不变，p1自然不变，还是掩耳盗铃。</p>
 <p>2.重写euquals方法<br>Q1：“为什么不直接用等号 &#x3D;&#x3D; 对比两个对象，而要写 equals() 这么麻烦？”<br>A：&#x3D;&#x3D; 比较的是两个对象的内存地址是否相同（引用是否一致），即判断是否是同一个对象。<br>如果你不重写 equals() 方法，默认行为等同于 &#x3D;&#x3D;（Object类默认的实现）。<br>重写equals方法后，比较的是两个对象的逻辑内容是否相同（可以自定义什么算逻辑内容相同），即判断是否是“内容上相等”。<br>举个生活中的例子，&#x3D;&#x3D; 相当于判断：这两张身份证是不是“完全同一张卡片”？（内存地址）<br>equals() 问题：这两张身份证上是不是“属于同一个人”？（内容逻辑）<br>Q2：正确重写equals方法示例？</p>
 <pre><code class="language-java">public boolean equals(Object obj) &#123;
         if (this == obj) return true;
