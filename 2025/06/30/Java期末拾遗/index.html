@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>更新日志2 | 天童爱丽丝.top</title>
+    <title>Java期末拾遗 | 天童爱丽丝.top</title>
     <meta name="author" content="Sunshine" />
     <meta name="description" content="一个初入计算机领域的二次元人士の小窝" />
     <meta name="keywords" content="" />
@@ -187,14 +187,14 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>更新日志2</h1>
+        <h1>Java期末拾遗</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2025/6/6
+            2025/6/30
         </span>
         
         
@@ -206,8 +206,8 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/" style="color: #ffa2c4">
-                    更新日志
+                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9B%B8%E5%85%B3/" style="color: #ff7d73">
+                    计算机相关
                 </a>
             </span>
             
@@ -216,7 +216,7 @@
     </div>
     
     <div class="content" v-pre>
-        <p>今天是建站第二天，再此重新研读了此hexo主题作者的教程和相关讨论后，<br>学会了正确构建tags、categories页面的方法，并付诸实践。<br>加深了对hexo架构的些许理解。<br>现在两个页面实现了应有的标签功能，不再是错误放置文章的地盘。<br>在Rain帮助下导入鼠标点击特效。<br>挂上了两个朋友的友链（其他朋友似乎没有blog)<br>网站的结构初步明朗，未来可能尝试实现评论功能。<br>但是编程实训在即，zzz新大版本也开了，<br>新功能可能没那么快实现喵。</p>
+        <p>哎哟，又到期末了，java有一些细碎知识还不会，<br>故在此收集并记录，我在期末拾来的java知识。<br>1.重写euquals方法<br>Q1：“为什么不直接用等号 &#x3D;&#x3D; 对比两个对象，而要写 equals() 这么麻烦？”<br>A：&#x3D;&#x3D; 比较的是两个对象的内存地址是否相同（引用是否一致），即判断是否是同一个对象。<br>如果你不重写 equals() 方法，默认行为等同于 &#x3D;&#x3D;（Object类默认的实现）。<br>重写equals方法后，比较的是两个对象的逻辑内容是否相同（可以自定义什么算逻辑内容相同），即判断是否是“内容上相等”。<br>举个生活中的例子，&#x3D;&#x3D; 相当于判断：这两张身份证是不是“完全同一张卡片”？（内存地址）<br>equals() 问题：这两张身份证上是不是“属于同一个人”？（内容逻辑）<br>Q2：正确重写equals方法示例？<br>public boolean equals(Object obj) {<br>        if (this &#x3D;&#x3D; obj) return true;<br>        if (obj &#x3D;&#x3D; null || getClass() !&#x3D; obj.getClass()) return false;<br>        Product product &#x3D; (Product) obj;<br>        return initialCode.equals(product.initialCode);<br>    }<br>（当 if 语句后面只有一条语句时，可以省略大括号 {}。执行语句仅为后面的那一句，但这只是语法允许，不代表是最佳实践。）<br>Q3:为什么要强制转化成product类?<br>Object 是所有类的父类，而 equals(Object obj) 方法的参数类型是 Object。<br>这句代码是把一个通用的 Object 类型，强制转换成你自己定义的具体类型 Product，<br>否则你就无法访问 Product 类中的字段或方法，比如下一句的比较initialCode，必须是访问 Product类才可以。<br>所以你必须告诉编译器：”我知道这个对象其实是 Product 类型”，于是要强制转换。<br>由于在前面已经做了类型检查：“if (obj &#x3D;&#x3D; null || getClass() !&#x3D; obj.getClass()) return false;”<br>所以之后进行强制类型转换是安全的。</p>
 
     </div>
     
