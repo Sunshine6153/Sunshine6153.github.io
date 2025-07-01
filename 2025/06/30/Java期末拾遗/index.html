@@ -206,7 +206,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9B%B8%E5%85%B3/" style="color: #ff7d73">
+                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9B%B8%E5%85%B3/" style="color: #ffa2c4">
                     计算机相关
                 </a>
             </span>
@@ -272,6 +272,30 @@ public class Demo &#123;
 <pre><code class="language-java">super(name);  // 调用父类 Person 的构造方法 Person(String name)
 </code></pre>
 <p>父类构造器参数需要什么类型，你在括号里就填什么类型。<br>与此同时，如果父类有多个构造器（不同构造器参数不同）<br>可以重载多个子类构造器，分别调用不同的 super(…)，<br>在括号里面填入不同父类构造器对应的数据类型即可。<br>补充：super(“Alice”); 和 super(name); 都是调用父类构造器的方式。<br>super(“Alice”); 是直接传字面量，和子类有没有参数无关。<br>super(name); 是传递子类构造器的参数，将子类构造器中的 name 变量传递给父类构造器。子类构造器传进什么，就传给父类，让父类帮忙构造。</p>
+<p>4.抽象类和抽象方法<br>Q1:什么样的类、方法是“抽象”的？<br>我们把没有方法主体的方法称为抽象方法。Java语法规定，包含抽象方法的类就是抽象类，例如：</p>
+<pre><code class="language-java">abstract class Animal //包含抽象方法，故为抽象类
+ &#123;
+    abstract void makeSound(); // 所有动物都必须有叫声(抽象方法)
+&#125;
+</code></pre>
+<p>Q2:既然没有方法主体，抽象类和抽象方法有什么用？<br>A:有的兄弟，有的。使用抽象类和抽象方法的主要目的是建立一个“通用模板”或“规范”，<br>它强制子类实现特定的方法行为，从而达到代码的可扩展性、可维护性和一致性。<br>继承抽象类的子类必须重写父类所有的抽象方法。否则，该子类也必须声明为抽象类。最终，必须有子类实现该父类的抽象方法，否则，<br>从最初的父类到最终的子类都不能创建对象，失去意义。所以抽象方法抽象类给子类指派了重写所有抽象方法的任务。<br>就像愚公临死前给子孙说了：“一定要移走门口的大山！”，子孙就必须实现这个任务（按中国传统孝道文化来说），<br>父亲没实现，孙子和重孙也得努力实现，直到所有抽象方法实现，当然，怎么实现是子类的事情，父类只需要指派任务就行了。<br>此时的方法重写，是子类对父类抽象方法的完成实现，我们将这种方法重写的操作，也叫做实现方法，例如：</p>
+<pre><code class="language-java">class Dog extends Animal &#123;
+    @Override
+    void makeSound() &#123;
+        System.out.println(&quot;Woof! Woof!&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>注意事项：<br>一.抽象类不能创建对象，如果创建，编译无法通过而报错。只能创建其非抽象子类的对象。<br>理解：假设创建了抽象类的对象，调用抽象的方法，而抽象方法没有具体的方法体，没有意义。<br>二.抽象类中，可以有构造方法，是供子类(已经重写所有抽象方法)创建对象时，初始化父类成员使用的。<br>三.抽象类中，不一定包含抽象方法，但是有抽象方法的类必定是抽象类。<br>抽象类中可以包含非抽象方法，写一些公共逻辑，这样子类可以复用，例如：</p>
+<pre><code class="language-java">abstract class Animal &#123;
+    abstract void makeSound();
+    
+    public void breathe() &#123;
+        System.out.println(&quot;Breathing...&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>每种动物都能呼吸，但发声不一样，我们把通用的breathe()及其方法主体写在抽象类里，作为公共逻辑,特有的 makeSound() 让子类各自实现。</p>
 
     </div>
     
