@@ -206,7 +206,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9B%B8%E5%85%B3/" style="color: #ffa2c4">
+                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9B%B8%E5%85%B3/" style="color: #ff7d73">
                     计算机相关
                 </a>
             </span>
@@ -296,6 +296,43 @@ public class Demo &#123;
 &#125;
 </code></pre>
 <p>每种动物都能呼吸，但发声不一样，我们把通用的breathe()及其方法主体写在抽象类里，作为公共逻辑,特有的 makeSound() 让子类各自实现。</p>
+<p>5.接口<br>Q1：接口与抽象类的区别？<br>A:如果抽象类比喻为魔园里面的魔法少女的话，虽然关键部分方法被抽象了，但还保留部分人的特征，<br>接口就是已经飞升到宇宙的圆神，变成圆环之理，成为指导所有引用该接口的类的规则了（哭，可爱的小圆和晓美焰）<br>接口没有构造函数，只能有常量（public static final），但是相比类可以实现多继承，即一个子类实现多个接口。<br>接口，是java语言中一种引用类型，是方法的集合，接口的内部主要就是封装了方法，<br>包含抽象方法、默认方法和静态方法，私有方法(JDK 9)。<br>接口的定义，与定义类相似，但是使用interface关键字。接口不能创建对象，但是可以被实现(implements，类似于被继承)。</p>
+<pre><code class="language-java"> public interface InterFaceName &#123;
+ public abstract void method();
+  public default void method() &#123;
+  System.out.println(&quot;This is a default method&quot;);
+  // 默认方法需执行语句
+&#125;
+ public static void method2() &#123;
+  System.out.println(&quot;This is a static method&quot;);
+  // 抽象方法需执行语句
+  &#125;
+ &#125;
+</code></pre>
+<p>与抽象方法的子类类似，一个实现接口的类，需要实现接口中的所有的抽象方法，<br>然后创建该类对象，就可以调用方法了，否则它必须是一个抽象类。<br>非抽象子类实现接口：1.必须重写接口所有的抽象方法。<br>2.继承了接口的默认方法，既可以直接调用，也可重写。</p>
+<pre><code class="language-java">class类名implements接口名&#123;
+ // 重写接口中抽象方法【必须】
+// 重写接口中默认方法【可选】
+&#125;
+</code></pre>
+<p>Q2：抽象方法、默认方法和静态方法的区别？<br>A：抽象方法必须没有方法体，必须被重写。<br>默认方法类必须有方法体，可以不重写直接调用，也可以重写(注意default不能省略)。<br>静态方法也必须有方法体，只能用接口名调用，不可以被重写，不可以通过实现类的类名或者实现类的对象调用,例如：</p>
+<pre><code class="language-java">interface Tool &#123;
+    static void info() &#123;
+        System.out.println(&quot;Interface static method&quot;);
+    &#125;
+&#125;
+
+class MyTool implements Tool &#123;&#125;
+
+public class Main &#123;
+    public static void main(String[] args) &#123;
+        MyTool t = new MyTool();
+        //t.info();         // ❌ 编译错误：不能通过对象调用接口的静态方法
+
+        Tool.info();          // ✅ 正确：接口名调用
+    &#125;
+&#125;
+</code></pre>
 
     </div>
     
