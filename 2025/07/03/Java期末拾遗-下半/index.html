@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>tags | 天童爱丽丝.top</title>
+    <title>Java期末拾遗-下半 | 天童爱丽丝.top</title>
     <meta name="author" content="Sunshine" />
     <meta name="description" content="一个初入计算机领域的二次元人士の小窝" />
     <meta name="keywords" content="" />
@@ -37,6 +37,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -181,45 +185,139 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="archives">
-    
-    <div class="categories-tags">
-        
-        
-        
-        <span>
-            <a href="/tags/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/" style="background: #00bcd4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                更新日志
-            </a>
+            <div class="article">
+    <div>
+        <h1>Java期末拾遗-下半</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/7/3
         </span>
         
         
-        
-        <span>
-            <a href="/tags/%E5%85%AC%E5%91%8A/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                公告
-            </a>
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9B%B8%E5%85%B3/" style="color: #ffa2c4">
+                    计算机相关
+                </a>
+            </span>
+            
         </span>
-        
-        
-        
-        <span>
-            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9B%B8%E5%85%B3/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-tags fa-fw"></i>
-                </span>
-                计算机相关
-            </a>
-        </span>
-        
         
     </div>
+    
+    <div class="content" v-pre>
+        <p>1.编译器和解释器的区别<br>编译器是“一次性翻译，整体执行”，解释器是“一边翻译，一边执行”。<br>对比图（改自GPT）：</p>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>编译器（Compiler）</th>
+<th>解释器（Interpreter）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>翻译方式</td>
+<td><strong>一次性</strong>将整个源代码编译成可执行文件</td>
+<td><strong>逐行解释</strong>源代码并立即执行</td>
+</tr>
+<tr>
+<td>输出结果</td>
+<td>可执行文件（如 <code>.exe</code>、<code>.class</code> 等）</td>
+<td>无独立可执行文件，直接运行</td>
+</tr>
+<tr>
+<td>执行效率</td>
+<td>高（编译后运行快）</td>
+<td>较低（每次运行都要解释）</td>
+</tr>
+<tr>
+<td>调试方便程度</td>
+<td>不易定位具体错误行（需要整个编译过程）</td>
+<td>容易定位（出错立即停止）</td>
+</tr>
+<tr>
+<td>第一次运行速度</td>
+<td>慢（需要先编译）</td>
+<td>快（直接运行）</td>
+</tr>
+<tr>
+<td>依赖环境</td>
+<td>编译后可独立运行，不再依赖编译器</td>
+<td>每次运行都依赖解释器</td>
+</tr>
+<tr>
+<td>常见语言</td>
+<td>C、C++、Java（先编译成字节码）</td>
+<td>Python、JavaScript、Ruby</td>
+</tr>
+<tr>
+<td>需要注意的是：Java既是编译型又是解释型语言。</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>这句话看起来矛盾，其实是因为 Java 有两个阶段的执行过程，结合了编译型语言和解释型语言的特点。</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>第一步：编译（Compiler）</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Java 源代码（.java 文件）会先被 编译器（javac） 编译成 字节码文件（.class），这个过程是一次性编译，类似于 C、C++ 的编译阶段。</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>第二步：解释（Interpreter）或即时编译（JIT）</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>编译后的 .class 文件不是直接执行的，而是由 Java 虚拟机（JVM） 来运行：</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>JVM 内部会用 解释器 把字节码一行一行“翻译”成机器指令并执行。</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>同时，JVM 的 JIT（Just-In-Time）编译器 会把频繁执行的字节码“临时编译”为本地机器码，提高效率。</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>2.static变量<br>static 变量（也叫静态变量），是属于类（class）而不是对象（object）的变量。<br>static能够修饰成员变量和方法，内部类，也可以形成静态static代码块，不能修饰局部变量。<br>静态代码块：定义在成员位置，使用static修饰的代码块{}，随着类的加载而执行，且执行一次，优先于main方法和构造方法的执行。<br>static 变量在内存中只存在一份，它是随着类的加载而加载的，且只加载一次。例如：<br>Java 程序的入口方法 main是一个 static（静态）方法。</p>
+<pre><code class="language-java">public static void main(String[] args)&#123;&#125;
+</code></pre>
+<p>它优先于对象存在，所以，可以被所有对象共享。<br>需要注意的是：静态方法不能访问非静态变量，因为它没有 this 对象。<br>静态方法在没有任何对象的情况下就可以被调用，而非静态变量属于某个对象，必须通过 this 才能访问。<br>this 代表当前对象的引用，而静态方法属于类本身，不属于任何对象，所以它没有 this。</p>
+<pre><code class="language-java">static void print() &#123;
+    System.out.println(name); // ❌ 错误，name 是非静态变量
+&#125;
+</code></pre>
+<p>3.多态、重写与重载<br>多态：<br>多态是指同一行为，具有多个不同的表现形式。<br>即父类定义了一个方法，而子类方法重写该方法时方法主体不一样，<br>这样在不同子类里面这个方法的实现形式就不一样，能让程序更有扩展性。<br>需要注意：当使用多态方式调用方法时，首先检查父类中是否有该方法，如果没有，则编译错误，不能调用子类拥有，而父类没有的方法。想要调用子类特有的方法，必须做向下转型。</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
     
 </div>
 
@@ -302,6 +400,22 @@
 
     <script src="/js/main.js"></script>
     <!-- giscus评论系统 -->
+    
+    <script src="https://giscus.app/client.js"
+        data-repo="Sunshine6153/blog-giscus"
+        data-repo-id="R_kgDOO3-z1g"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOO3-z1s4CrLm3"
+        data-mapping="pathname"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+    </script>
     
 </body>
 </html>
