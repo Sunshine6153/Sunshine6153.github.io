@@ -283,7 +283,79 @@
     System.out.println(name); // ❌ 错误，name 是非静态变量
 &#125;
 </code></pre>
-<p>3.多态、重写与重载<br>多态：<br>多态是指同一行为，具有多个不同的表现形式。<br>即父类定义了一个方法，而子类方法重写该方法时方法主体不一样，<br>这样在不同子类里面这个方法的实现形式就不一样，能让程序更有扩展性。<br>需要注意：当使用多态方式调用方法时，首先检查父类中是否有该方法，如果没有，则编译错误，不能调用子类拥有，而父类没有的方法。想要调用子类特有的方法，必须做向下转型。</p>
+<p>3.多态、重写与重载<br>重写：<br>重写是实现多态的必要前提之一。<br>子类出现重名的成员方法(返回值类型，方法名和参数列表都相同)，访问是特殊情况，声明不变，将父类方法重新实现。<br>需要注意：1.子类方法覆盖父类方法，返回值类型、函数名和参数列表都要一模一样。<br>         2.子类方法覆盖父类方法，必须要保证权限大于等于父类权限（例如父类是 public，子类不能是 protected），<br>           子类抛出的异常不能比父类方法更宽泛。<br>例如：</p>
+<pre><code class="language-java">class Animal &#123;
+    void makeSound() &#123;
+        System.out.println(&quot;Animal sound&quot;);
+    &#125;
+&#125;
+
+class Dog extends Animal &#123;
+    @Override
+    void makeSound() &#123;
+        System.out.println(&quot;Bark&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>重载：<br>在一个类中方法名相同，但参数不同（类型或个数），返回类型可以相同或不同的多个方法。</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>是否需要继承</td>
+<td>无需继承，可在同一个类中定义</td>
+</tr>
+<tr>
+<td>方法名</td>
+<td>相同</td>
+</tr>
+<tr>
+<td>参数列表</td>
+<td>必须不同（类型、数量或顺序不同）</td>
+</tr>
+<tr>
+<td>返回类型</td>
+<td>可以不同，但不能靠返回类型区分方法</td>
+</tr>
+</tbody></table>
+<p>例如：</p>
+<pre><code class="language-java">class Calculator &#123;
+    int add(int a, int b) &#123;
+        return a + b;
+    &#125;
+
+    double add(double a, double b) &#123;
+        return a + b;
+    &#125;
+
+    int add(int a, int b, int c) &#123;
+        return a + b + c;
+    &#125;
+&#125;
+</code></pre>
+<p>多态：<br>多态是指同一行为，具有多个不同的表现形式。<br>即父类定义了一个方法，而子类方法重写该方法时方法主体不一样，<br>这样在不同子类里面这个方法的实现形式就不一样，能让程序更有扩展性。<br>需要注意：当使用多态方式调用方法时，首先检查父类中是否有该方法，如果没有，则编译错误，不能调用子类拥有，而父类没有的方法。想要调用子类特有的方法，必须做向下转型。<br>多态例如：</p>
+<pre><code class="language-java">class Animal &#123;
+    void makeSound() &#123; &#125;
+&#125;
+
+class Dog extends Animal &#123;
+    @Override
+    void makeSound() &#123;  //对于Cat子类,makeSound方法是Bark
+        System.out.println(&quot;Bark&quot;);
+    &#125;
+&#125;
+
+class Cat extends Animal &#123;
+    @Override
+    void makeSound() &#123;  //对于Cat子类,makeSound方法是Hajimi
+        System.out.println(&quot;Hajimi&quot;);
+    &#125;
+&#125;
+</code></pre>
 
             
         </div>
@@ -298,7 +370,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9B%B8%E5%85%B3/" style="color: #00bcd4">计算机相关</a>
+            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9B%B8%E5%85%B3/" style="color: #ff7d73">计算机相关</a>
         </span>
         
     </div>
@@ -454,7 +526,7 @@ public class Main &#123;
         
         <span class="tag">
             
-            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9B%B8%E5%85%B3/" style="color: #03a9f4">计算机相关</a>
+            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9B%B8%E5%85%B3/" style="color: #ffa2c4">计算机相关</a>
         </span>
         
     </div>
@@ -494,7 +566,7 @@ public class Main &#123;
         
         <span class="tag">
             
-            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9B%B8%E5%85%B3/" style="color: #00bcd4">计算机相关</a>
+            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9B%B8%E5%85%B3/" style="color: #00a596">计算机相关</a>
         </span>
         
     </div>
@@ -534,7 +606,7 @@ public class Main &#123;
         
         <span class="tag">
             
-            <a href="/tags/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/" style="color: #00bcd4">更新日志</a>
+            <a href="/tags/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/" style="color: #ffa2c4">更新日志</a>
         </span>
         
     </div>
@@ -694,7 +766,7 @@ public class Main &#123;
         
         <span class="tag">
             
-            <a href="/tags/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/" style="color: #ffa2c4">更新日志</a>
+            <a href="/tags/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/" style="color: #00a596">更新日志</a>
         </span>
         
     </div>
@@ -734,7 +806,7 @@ public class Main &#123;
         
         <span class="tag">
             
-            <a href="/tags/%E5%85%AC%E5%91%8A/" style="color: #ffa2c4">公告</a>
+            <a href="/tags/%E5%85%AC%E5%91%8A/" style="color: #00bcd4">公告</a>
         </span>
         
     </div>
