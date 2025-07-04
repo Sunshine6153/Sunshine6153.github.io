@@ -206,7 +206,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9B%B8%E5%85%B3/" style="color: #03a9f4">
+                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9B%B8%E5%85%B3/" style="color: #00a596">
                     计算机相关
                 </a>
             </span>
@@ -343,6 +343,39 @@ class Cat extends Animal &#123;
     &#125;
 &#125;
 </code></pre>
+<p>4.关系<br>在画类图的时候，”is-a” 和 “has-a” 是两种最基础的关系。</p>
+<ol>
+<li>“is-a” 关系（继承&#x2F;实现），包括子类 继承 父类，或类 实现 接口。<br> 继承（类 → 类）：空心三角箭头（子类指向父类），如：Dog ──────▷ Animal<br> 实现（类 → 接口）：虚线空心三角箭头 或 棒棒糖表示法，如：<br> Dog ⤍ «interface» Runnable或Dog ───○ Runnable</li>
+<li>“has-a” 关系（组合&#x2F;聚合&#x2F;关联），表示一个类包含另一个类的对象。<br>组合（Composition）：强依赖，部分不能脱离整体存在（如 Car 和 Engine）。<br>聚合（Aggregation）：弱依赖，部分可以独立存在（如 University 和 Department）。<br>关联（Association）：普通的持有关系（如 Student 和 Course）。<table>
+<thead>
+<tr>
+<th>关系类型</th>
+<th>符号</th>
+<th>示例</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>组合</td>
+<td>实心菱形 ◆──</td>
+<td>Car ◆── Engine</td>
+<td>生命周期绑定，强依赖</td>
+</tr>
+<tr>
+<td>聚合</td>
+<td>空心菱形 ◇──</td>
+<td>University ◇── Department</td>
+<td>生命周期独立，弱依赖</td>
+</tr>
+<tr>
+<td>关联</td>
+<td>实线箭头 ───&gt;</td>
+<td>Student ───&gt; Course</td>
+<td>普通持有关系</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
 
     </div>
     
