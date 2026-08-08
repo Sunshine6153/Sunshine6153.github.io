@@ -1,0 +1,441 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>C和Rust混合探索 | Sunshine的博客</title>
+    <meta name="author" content="Sunshine" />
+    <meta name="description" content="记录日常的收获和发电" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    <style>
+        /* 新增：一言容器的CSS样式 */
+        #hitokoto {
+            text-align: center;
+            margin: 2rem 0 1rem 0;
+            padding: 1.5rem;
+            font-size: 1.1rem;
+            color: #666;
+            border-top: 1px dashed rgba(0,0,0,0.1);
+            border-bottom: 1px dashed rgba(0,0,0,0.1);
+            background: rgba(250,250,250,0.5);
+            border-radius: 8px;
+        }
+        #hitokoto a {
+            font-style: italic;
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s;
+        }
+        #hitokoto a:hover {
+            color: #333;
+        }
+    </style>
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <!-- 鼠标点击特效 -->
+    <canvas
+        id="fireworks"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"
+    ></canvas>
+    <script src="https://s4.zstatic.net/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="/js/fireworks.min.js"></script>
+
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>SUNSHINE的博客</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/projects">
+            <i class="fa-solid fa-diagram-project fa-fw"></i>
+            <span>&ensp;Projects</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;SUNSHINE的博客</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/projects">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-diagram-project fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Projects</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>C和Rust混合探索</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/9/16
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9B%B8%E5%85%B3/" style="color: #03a9f4">
+                    计算机相关
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <p><strong>前言</strong>：<br>先锋的同学鼓励对于C和Rust混合编程的探索，那就开始吧。<br>面试题内容之前我多多少少略有涉猎，但是Rust我还真没听过。<br>之前我一直认为C的恼人的手动管理内存和Java基本数据类型无法修改值等问题是存在于是就合理的，似乎是自它们诞生之初就无法改变的特点。但是目前看来Rust给了个解决方案。<del>但是我觉得语言更不美了</del> :joy:<br><strong>C和Rust混合探索</strong>：<br>Java、Python和C++ 之间的互调用常常依赖于各自的外部函数接口（FFI）或特定的绑定库。<br>但是ABI主要用于静态编译（源码转机器码，机器码转可执行文件）的语言，例如 C 和 C++。所以C和Rust使用ABI进行互相调用咯。<br><strong>调用问题（上）</strong><br>Rust调用C<br>在Rust中，先要链接c文件（夹）</p>
+<pre><code class="language-rust">#[link(name = &quot;your_c&quot;)]
+</code></pre>
+<p>需要使用extern “C”来声明”我要调用c咯”</p>
+<pre><code class="language-rust">extern &quot;C&quot; &#123;
+    fn add_numbers(a: i32, b: i32) -&gt; i32;//问题：这是什么？
+&#125;
+</code></pre>
+<p>调用C语言代码时，Rust编译器无法保证内存安全，因为C语言没有内置的内存安全机制。因此，所有的调用都必须放在unsafe{ }里面。</p>
+<pre><code class="language-rust">fn main() &#123;
+    unsafe &#123;
+        let result = add_numbers(10, 20);
+        println!(&quot;sum: &#123;&#125;&quot;, result);
+    &#125;
+&#125;
+</code></pre>
+<p><strong>数据类型映射</strong><br>好的，我们不得不先解决数据映射的问题。:worried:<br>众所周知，rust整数类型按位长度划分（如i8&#x2F;i16&#x2F;i32…u8&#x2F;u16&#x2F;u32…）且整数常量默认为i32，因此里面的a、b就是属于系统默认的整数类型，跟C里面的int很像对吧。<br>Rust的标准库提供了许多与C语言类型对应的类型，数据类型互通正如货币互通，这样两边才好说话吧。<br>直接叫ai帮忙造个表格~~~~懒得手打~~</p>
+<table>
+<thead>
+<tr>
+<th align="left">C 语言类型</th>
+<th align="left">Rust 对应类型</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>char</code></td>
+<td align="left"><code>c_char</code></td>
+<td align="left">通常为 <code>i8</code> 或 <code>u8</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>int</code></td>
+<td align="left"><code>c_int</code></td>
+<td align="left">通常为 <code>i32</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>float</code></td>
+<td align="left"><code>c_float</code></td>
+<td align="left">相当于 <code>f32</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>double</code></td>
+<td align="left"><code>c_double</code></td>
+<td align="left">相当于 <code>f64</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>void</code></td>
+<td align="left"><code>c_void</code></td>
+<td align="left">用于指针，如 <code>void *</code> 对应 <code>*mut c_void</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>char *</code></td>
+<td align="left"><code>*mut c_char</code></td>
+<td align="left">指向 C 字符串的可变指针。</td>
+</tr>
+<tr>
+<td align="left"><code>const char *</code></td>
+<td align="left"><code>*const c_char</code></td>
+<td align="left">指向 C 字符串的不可变指针。</td>
+</tr>
+<tr>
+<td align="left"><code>struct</code></td>
+<td align="left"><code>#[repr(C)]</code> 的 <code>struct</code></td>
+<td align="left">必须使用 <code>#[repr(C)]</code> 宏保证内存布局兼容。</td>
+</tr>
+<tr>
+<td align="left"><code>enum</code></td>
+<td align="left"><code>#[repr(C)]</code> 的 <code>enum</code></td>
+<td align="left">必须使用 <code>#[repr(C)]</code> 宏保证大小和布局兼容。</td>
+</tr>
+</tbody></table>
+<p><strong>调用问题（下）</strong><br>好的好的，数据类型映射问题暂时解决了，继续。<br>C语言调用Rust函数时，<strong>首先</strong>需要将Rust函数暴露为C语言兼容的ABI。<br>具体方式是使用#[no_mangle]和extern “C”这两个属性来修饰函数。</p>
+<pre><code class="language-rust">#[no_mangle]//告诉编译器不要对函数名进行“名字重整”
+pub extern &quot;C&quot; //按照C语言来编订这个函数
+fn add_numbers(a: i32, b: i32) -&gt; i32 &#123;
+    a + b
+&#125;
+</code></pre>
+<p><strong>第二步</strong>将Rust代码编译成一个C动态链接库或者静态链接库（这样C语言才能调用）如示例：</p>
+<pre><code class="language-Ini">[lib]
+name = &quot;rust_lib&quot;
+crate-type = [&quot;cdylib&quot;]
+</code></pre>
+<p>然后运行</p>
+<pre><code>cargo build --release
+</code></pre>
+<p>生成的库文件将默认位于target&#x2F;release&#x2F;目录下。（先锋示例好像没有，是要我自己来吗？）<br><strong>最后</strong>，在C语言代码中，就可以像调用其他C函数一样调用这个Rust函数。</p>
+<pre><code class="language-c">extern int rust_add(int a, int b);// 记得声明Rust函数
+</code></pre>
+<p><strong>但是</strong>，先锋示例也不是这样喵。<br>方法是提供了个头文件,有点像接口。</p>
+<pre><code class="language-C">// rust_functions.h
+#ifndef RUST_FUNCTIONS_H
+#define RUST_FUNCTIONS_H
+
+int add_numbers(int a, int b);
+int multiply_numbers(int a, int b);
+#endif
+</code></pre>
+<p>这样其他文件只需要 #include 这个头文件就行了，可以调用了。好吧，这也是种省事的方法。</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+
+            <!-- 一言展示区（页脚上方） -->
+            <div id="hitokoto">
+                <a href="#" id="hitokoto_text">:D 加载中...</a>
+            </div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 Sunshine的博客
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Sunshine
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+
+    <!-- 一言API脚本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hitokotoEl = document.getElementById('hitokoto_text');
+            
+            // 从缓存读取一言（如果有）
+            const cachedHitokoto = localStorage.getItem('hitokoto');
+            const cacheTime = localStorage.getItem('hitokoto_time');
+            
+            // 如果缓存存在且未过期（1分钟）
+            if (cachedHitokoto && cacheTime && Date.now() - cacheTime < 60000) {
+                try {
+                    const data = JSON.parse(cachedHitokoto);
+                    updateHitokoto(data);
+                    return;
+                } catch (e) {
+                    console.log('缓存解析失败，重新获取');
+                }
+            }
+            
+            // 从API获取新的一言
+            fetch('https://v1.hitokoto.cn/?c=a&encode=json&charset=utf-8')
+                .then(response => response.json())
+                .then(data => {
+                    updateHitokoto(data);
+                    // 缓存到本地
+                    localStorage.setItem('hitokoto', JSON.stringify(data));
+                    localStorage.setItem('hitokoto_time', Date.now());
+                })
+                .catch(error => {
+                    console.error('获取一言失败:', error);
+                    hitokotoEl.innerText = '「生活就像海洋，只有意志坚强的人才能到达彼岸」';
+                });
+                
+            function updateHitokoto(data) {
+                hitokotoEl.href = `https://hitokoto.cn/?uuid=${data.uuid}`;
+                let text = data.hitokoto;
+                if (data.from) text += ' —— ' + data.from;
+                hitokotoEl.innerText = text;
+            }
+        });
+    </script>
+
+    <script src="/js/main.js"></script>
+    <!-- giscus评论系统 -->
+    
+    <script src="https://giscus.app/client.js"
+        data-repo="Sunshine6153/blog-giscus"
+        data-repo-id="R_kgDOO3-z1g"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOO3-z1s4CrLm3"
+        data-mapping="pathname"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+    </script>
+    
+</body>
+</html>

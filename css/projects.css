@@ -1,0 +1,266 @@
+/* --- 项目展示页 --- */
+
+/* 页面容器 */
+#projects-page {
+    margin: 100px auto 0 auto;
+    padding: 20px;
+    max-width: 900px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* GitHub 统计卡片 */
+#github-stats {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 0 20px #d9d9d980;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+#github-card {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 30px 40px;
+    gap: 30px;
+}
+#github-profile {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+    min-width: 200px;
+}
+#github-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 3px solid #f1f1f1;
+}
+#github-user-info h2 {
+    margin: 0 0 5px 0;
+    font-size: 20px;
+    color: #1e3e3f;
+}
+#github-user-info p {
+    margin: 0;
+    font-size: 13px;
+    color: #5c6b72;
+    max-width: 300px;
+}
+#github-numbers {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+.stat-item {
+    text-align: center;
+    min-width: 55px;
+}
+.stat-num {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    color: #66afef;
+}
+.stat-label {
+    display: block;
+    font-size: 12px;
+    color: #5c6b72;
+    margin-top: 2px;
+}
+#github-heatmap {
+    padding: 0 30px 20px;
+}
+#heatmap-img {
+    width: 100%;
+    border-radius: 10px;
+    display: block;
+}
+
+/* 项目卡片网格 */
+#project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+.project-card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 0 20px #d9d9d980;
+    padding: 35px 30px;
+    transition: box-shadow 0.25s, transform 0.25s;
+    display: flex;
+    flex-direction: column;
+}
+.project-card:hover {
+    box-shadow: 0 0 5px #d9d9d9;
+    transform: translate(-5px, -5px);
+}
+.project-name {
+    font-size: 20px;
+    margin: 0 0 15px 0;
+    text-align: center;
+}
+.project-name a {
+    color: #66afef;
+}
+.project-name a:hover {
+    opacity: 0.8;
+}
+.project-meta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 15px;
+    font-size: 13px;
+    color: #5c6b72;
+}
+.project-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+.status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+.status-active .status-dot {
+    background: #34d058;
+    box-shadow: 0 0 6px #34d05880;
+}
+.status-completed .status-dot {
+    background: #66afef;
+    box-shadow: 0 0 6px #66afef80;
+}
+.status-archived .status-dot {
+    background: #999;
+}
+.project-desc {
+    color: #1e3e3f;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 18px;
+    flex: 1;
+}
+.project-desc p {
+    margin: 0;
+}
+.project-tech {
+    margin-bottom: 18px;
+    font-size: 13px;
+    line-height: 1.8;
+}
+.project-tech .icon {
+    color: #5c6b72;
+    margin-right: 5px;
+}
+.tech-tag {
+    display: inline-block;
+    font-weight: bold;
+    margin-right: 8px;
+}
+.project-links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.project-btn {
+    display: inline-block;
+    background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%);
+    border-radius: 20px 0;
+    box-shadow: 2px 2px 10px 0 #ffbbf47a;
+    color: #fff;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 8px 18px;
+    transition: box-shadow 0.25s ease-out, transform 0.25s ease-out;
+}
+.project-btn:hover {
+    box-shadow: -2px -2px 10px 0 #9abbf77a;
+    transform: translate(-2px, -2px);
+    opacity: 1;
+}
+.project-btn-gh {
+    background: linear-gradient(120deg, #6f42c1 0%, #8957e5 100%);
+    box-shadow: 2px 2px 10px 0 #8957e57a;
+}
+.project-btn-gh:hover {
+    box-shadow: -2px -2px 10px 0 #6f42c17a;
+}
+
+/* 技术栈标签云 */
+#tech-cloud-wrap {
+    margin-top: 50px;
+    text-align: center;
+}
+#tech-cloud-title {
+    color: #5c6b72;
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+#tech-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+.cloud-tag {
+    display: inline-block;
+    border: 1px solid #ffffff80;
+    border-radius: 10px;
+    padding: 8px 16px;
+    transition: background 0.25s, border 0.25s, color 0.25s;
+    font-weight: bold;
+}
+.cloud-tag:hover {
+    background: #fff;
+    border-color: #a5c2f5;
+    color: #5c6b72 !important;
+}
+.cloud-tag.size-sm {
+    font-size: 13px;
+    padding: 6px 12px;
+}
+.cloud-tag.size-md {
+    font-size: 15px;
+    padding: 8px 16px;
+}
+.cloud-tag.size-lg {
+    font-size: 18px;
+    padding: 10px 20px;
+}
+
+/* 响应式 */
+@media (max-width: 900px) {
+    #projects-page {
+        margin-top: 60px;
+        padding: 15px;
+    }
+    #project-grid {
+        grid-template-columns: 1fr;
+    }
+    #github-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 25px 20px;
+    }
+    #github-profile {
+        flex-direction: column;
+    }
+    #github-numbers {
+        justify-content: center;
+    }
+    #github-heatmap {
+        padding: 0 15px 15px;
+    }
+}
+@media (min-width: 900px) and (max-width: 1200px) {
+    #projects-page {
+        max-width: 800px;
+    }
+}

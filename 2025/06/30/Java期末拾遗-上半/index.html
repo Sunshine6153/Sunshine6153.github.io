@@ -1,0 +1,459 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>Java期末拾遗-上半 | Sunshine的博客</title>
+    <meta name="author" content="Sunshine" />
+    <meta name="description" content="记录日常的收获和发电" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    <style>
+        /* 新增：一言容器的CSS样式 */
+        #hitokoto {
+            text-align: center;
+            margin: 2rem 0 1rem 0;
+            padding: 1.5rem;
+            font-size: 1.1rem;
+            color: #666;
+            border-top: 1px dashed rgba(0,0,0,0.1);
+            border-bottom: 1px dashed rgba(0,0,0,0.1);
+            background: rgba(250,250,250,0.5);
+            border-radius: 8px;
+        }
+        #hitokoto a {
+            font-style: italic;
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s;
+        }
+        #hitokoto a:hover {
+            color: #333;
+        }
+    </style>
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <!-- 鼠标点击特效 -->
+    <canvas
+        id="fireworks"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"
+    ></canvas>
+    <script src="https://s4.zstatic.net/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="/js/fireworks.min.js"></script>
+
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>SUNSHINE的博客</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/projects">
+            <i class="fa-solid fa-diagram-project fa-fw"></i>
+            <span>&ensp;Projects</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;SUNSHINE的博客</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/projects">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-diagram-project fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Projects</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>Java期末拾遗-上半</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/6/30
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9B%B8%E5%85%B3/" style="color: #ff7d73">
+                    计算机相关
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <p>哎哟，又到期末了，java有一些细碎知识还不会，<br>故在此收集并记录，我在期末拾来的java知识。</p>
+<p>1.传值和传址，Java与C<br>传值和传址<br>传值和传值的区别是什么？<br>假如现在你电脑桌面有个word文档，传值就是你把这文档创建了一个副本，<br>然后你是原封不动的把这个文档提交了，或是把它修改了，都跟你最初的文档一点关系没有。<br>然后传址就是你把原文件改了。<br>对于C&#x2F;C++,我们可以真正传递地址（指针），通过指针修改原始变量。<br>而对于Java，Jesus Crime!<br>我们无法修改基本变量的值！<br>Java 中所有参数传递本质上是值传递，但分两种情况：<br>对于基本类型（int, double 等），传的是值的副本，对值无法改变</p>
+<pre><code class="language-java">public class Main &#123;
+    public static void main(String[] args) &#123;
+        int x = 10;
+        change(x);
+        System.out.println(x);  // 输出仍是 10
+    &#125;
+
+    static void change(int val) &#123;
+        val = 20;  // 改的是 val 的副本
+    &#125;
+&#125;
+</code></pre>
+<p>x 的值没有变，因为change（）只是把 x 的副本传进去了，这个change()只是自欺欺人罢了。<br>但是对于对象和数组，虽然值传递的“祖宗章程”没变，但是情况有变。<br>如果是对象或是数组，传的是“引用的副本”，即拷贝了一份引用数据的地址，通过改变引用数据的地址可以改对象内部。</p>
+<pre><code class="language-java">class Person &#123;
+    String name;
+&#125;
+
+public class Demo &#123;
+    public static void change(Person p) &#123;
+        p.name = &quot;Alice&quot;;   // 改变对象内容 ✅
+        p = new Person();   // 改变引用本身 ❌（不会影响原来的 p）
+        p.name = &quot;Sunshine&quot;;     // 改变的是新对象
+    &#125;
+
+    public static void main(String[] args) &#123;
+        Person p1 = new Person();
+        p1.name = &quot;Tom&quot;;
+        change(p1);
+        System.out.println(p1.name); // 输出是 Alice
+    &#125;
+&#125;
+</code></pre>
+<p>引用数据类型存储的是“对象的地址”（引用）。<br>在这个例子里面，name原来引用Tom的地址，使得p1的name对应为Tom。<br>然后再change()函数里面，将引用的数据改为“Alice”，将新的ALice的地址给name引用，从而改变了对象的内容。<br>但是下一步尝试将新对象赋给p，实际只是创建了一个p的副本，让这个副本指向了一个新的对象，<br>原来p不变，p1自然不变，还是掩耳盗铃。</p>
+<p>2.重写euquals方法<br>Q1：“为什么不直接用等号 &#x3D;&#x3D; 对比两个对象，而要写 equals() 这么麻烦？”<br>A：&#x3D;&#x3D; 比较的是两个对象的内存地址是否相同（引用是否一致），即判断是否是同一个对象。<br>如果你不重写 equals() 方法，默认行为等同于 &#x3D;&#x3D;（Object类默认的实现）。<br>重写equals方法后，比较的是两个对象的逻辑内容是否相同（可以自定义什么算逻辑内容相同），即判断是否是“内容上相等”。<br>举个生活中的例子，&#x3D;&#x3D; 相当于判断：这两张身份证是不是“完全同一张卡片”？（内存地址）<br>equals() 问题：这两张身份证上是不是“属于同一个人”？（内容逻辑）<br>Q2：正确重写equals方法示例？</p>
+<pre><code class="language-java">public boolean equals(Object obj) &#123;
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Product product = (Product) obj;
+        return initialCode.equals(product.initialCode);
+    &#125;
+</code></pre>
+<p>（当 if 语句后面只有一条语句时，可以省略大括号 {}。执行语句仅为后面的那一句，但这只是语法允许，不代表是最佳实践。）<br>Q3:为什么要强制转化成product类?<br>Object 是所有类的父类，而 equals(Object obj) 方法的参数类型是 Object。<br>这句代码是把一个通用的 Object 类型，强制转换成你自己定义的具体类型 Product，<br>否则你就无法访问 Product 类中的字段或方法，比如下一句的比较initialCode，必须是访问 Product类才可以。<br>所以你必须告诉编译器：”我知道这个对象其实是 Product 类型”，于是要强制转换。<br>由于在前面已经做了类型检查：</p>
+<pre><code class="language-java">if (obj == null || getClass() != obj.getClass()) return false;
+</code></pre>
+<p>所以之后进行强制类型转换是安全的。</p>
+<p>3.父类构造器与super()<br>Q1:父类可以没有任何构造器吗?<br>A:父类必须有构造器，但可以不显式写(你自己手敲)<br>如果你没有写任何构造器，Java 会自动帮你加一个无参构造器（默认构造器）。</p>
+<pre><code class="language-java">class Parent &#123;
+    // 没写构造器，Java 自动添加：Parent() &#123;&#125;
+&#125;
+</code></pre>
+<p>一旦你写了任意一个构造器（哪怕是带参数的），Java 就不会自动添加默认构造器了。<br>Q2:子类怎么调用构造器？<br>对于子类、父类构造器而言，它只能够被调用，而不能被继承。<br>子类会默认调用父类的构造器，但是如果没有默认的父类构造器（即构造器是有参的），<br>子类必须要显示的指定父类的构造器，即使用super(),<br>而且必须是在子类构造器中做的第一件事(第一行代码)。<br>如：</p>
+<pre><code class="language-java">super(name);  // 调用父类 Person 的构造方法 Person(String name)
+</code></pre>
+<p>父类构造器参数需要什么类型，你在括号里就填什么类型。<br>与此同时，如果父类有多个构造器（不同构造器参数不同）<br>可以重载多个子类构造器，分别调用不同的 super(…)，<br>在括号里面填入不同父类构造器对应的数据类型即可。<br>补充：super(“Alice”); 和 super(name); 都是调用父类构造器的方式。<br>super(“Alice”); 是直接传字面量，和子类有没有参数无关。<br>super(name); 是传递子类构造器的参数，将子类构造器中的 name 变量传递给父类构造器。子类构造器传进什么，就传给父类，让父类帮忙构造。</p>
+<p>4.抽象类和抽象方法<br>Q1:什么样的类、方法是“抽象”的？<br>我们把没有方法主体的方法称为抽象方法。Java语法规定，包含抽象方法的类就是抽象类，例如：</p>
+<pre><code class="language-java">abstract class Animal //包含抽象方法，故为抽象类
+ &#123;
+    abstract void makeSound(); // 所有动物都必须有叫声(抽象方法)
+&#125;
+</code></pre>
+<p>Q2:既然没有方法主体，抽象类和抽象方法有什么用？<br>A:有的兄弟，有的。使用抽象类和抽象方法的主要目的是建立一个“通用模板”或“规范”，<br>它强制子类实现特定的方法行为，从而达到代码的可扩展性、可维护性和一致性。<br>继承抽象类的子类必须重写父类所有的抽象方法。否则，该子类也必须声明为抽象类。最终，必须有子类实现该父类的抽象方法，否则，<br>从最初的父类到最终的子类都不能创建对象，失去意义。所以抽象方法抽象类给子类指派了重写所有抽象方法的任务。<br>就像愚公临死前给子孙说了：“一定要移走门口的大山！”，子孙就必须实现这个任务（按中国传统孝道文化来说），<br>父亲没实现，孙子和重孙也得努力实现，直到所有抽象方法实现，当然，怎么实现是子类的事情，父类只需要指派任务就行了。<br>此时的方法重写，是子类对父类抽象方法的完成实现，我们将这种方法重写的操作，也叫做实现方法，例如：</p>
+<pre><code class="language-java">class Dog extends Animal &#123;
+    @Override
+    void makeSound() &#123;
+        System.out.println(&quot;Woof! Woof!&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>注意事项：<br>一.抽象类不能创建对象，如果创建，编译无法通过而报错。只能创建其非抽象子类的对象。<br>理解：假设创建了抽象类的对象，调用抽象的方法，而抽象方法没有具体的方法体，没有意义。<br>二.抽象类中，可以有构造方法，是供子类(已经重写所有抽象方法)创建对象时，初始化父类成员使用的。<br>三.抽象类中，不一定包含抽象方法，但是有抽象方法的类必定是抽象类。<br>抽象类中可以包含非抽象方法，写一些公共逻辑，这样子类可以复用，例如：</p>
+<pre><code class="language-java">abstract class Animal &#123;
+    abstract void makeSound();
+    
+    public void breathe() &#123;
+        System.out.println(&quot;Breathing...&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>每种动物都能呼吸，但发声不一样，我们把通用的breathe()及其方法主体写在抽象类里，作为公共逻辑,特有的 makeSound() 让子类各自实现。</p>
+<p>5.接口<br>Q1：接口与抽象类的区别？<br>A:如果抽象类比喻为魔园里面的魔法少女的话，虽然关键部分方法被抽象了，但还保留部分人的特征，<br>接口就是已经飞升到宇宙的圆神，变成圆环之理，成为指导所有引用该接口的类的规则了（哭，可爱的小圆和晓美焰）<br>接口没有构造函数，只能有常量（public static final），但是相比类可以实现多继承，即一个子类实现多个接口。<br>接口，是java语言中一种引用类型，是方法的集合，接口的内部主要就是封装了方法，<br>包含抽象方法、默认方法和静态方法，私有方法(JDK 9)。<br>接口的定义，与定义类相似，但是使用interface关键字。接口不能创建对象，但是可以被实现(implements，类似于被继承)。</p>
+<pre><code class="language-java"> public interface InterFaceName &#123;
+ public abstract void method();
+  public default void method() &#123;
+  System.out.println(&quot;This is a default method&quot;);
+  // 默认方法需执行语句
+&#125;
+ public static void method2() &#123;
+  System.out.println(&quot;This is a static method&quot;);
+  // 抽象方法需执行语句
+  &#125;
+ &#125;
+</code></pre>
+<p>与抽象方法的子类类似，一个实现接口的类，需要实现接口中的所有的抽象方法，<br>然后创建该类对象，就可以调用方法了，否则它必须是一个抽象类。<br>非抽象子类实现接口：1.必须重写接口所有的抽象方法。<br>2.继承了接口的默认方法，既可以直接调用，也可重写。</p>
+<pre><code class="language-java">class类名implements接口名&#123;
+ // 重写接口中抽象方法【必须】
+// 重写接口中默认方法【可选】
+&#125;
+</code></pre>
+<p>Q2：抽象方法、默认方法和静态方法的区别？<br>A：抽象方法必须没有方法体，必须被重写。<br>默认方法类必须有方法体，可以不重写直接调用，也可以重写(注意default不能省略)。<br>静态方法也必须有方法体，只能用接口名调用，不可以被重写，不可以通过实现类的类名或者实现类的对象调用,例如：</p>
+<pre><code class="language-java">interface Tool &#123;
+    static void info() &#123;
+        System.out.println(&quot;Interface static method&quot;);
+    &#125;
+&#125;
+
+class MyTool implements Tool &#123;&#125;
+
+public class Main &#123;
+    public static void main(String[] args) &#123;
+        MyTool t = new MyTool();
+        //t.info();         // ❌ 编译错误：不能通过对象调用接口的静态方法
+
+        Tool.info();          // ✅ 正确：接口名调用
+    &#125;
+&#125;
+</code></pre>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+
+            <!-- 一言展示区（页脚上方） -->
+            <div id="hitokoto">
+                <a href="#" id="hitokoto_text">:D 加载中...</a>
+            </div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 Sunshine的博客
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Sunshine
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+
+    <!-- 一言API脚本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hitokotoEl = document.getElementById('hitokoto_text');
+            
+            // 从缓存读取一言（如果有）
+            const cachedHitokoto = localStorage.getItem('hitokoto');
+            const cacheTime = localStorage.getItem('hitokoto_time');
+            
+            // 如果缓存存在且未过期（1分钟）
+            if (cachedHitokoto && cacheTime && Date.now() - cacheTime < 60000) {
+                try {
+                    const data = JSON.parse(cachedHitokoto);
+                    updateHitokoto(data);
+                    return;
+                } catch (e) {
+                    console.log('缓存解析失败，重新获取');
+                }
+            }
+            
+            // 从API获取新的一言
+            fetch('https://v1.hitokoto.cn/?c=a&encode=json&charset=utf-8')
+                .then(response => response.json())
+                .then(data => {
+                    updateHitokoto(data);
+                    // 缓存到本地
+                    localStorage.setItem('hitokoto', JSON.stringify(data));
+                    localStorage.setItem('hitokoto_time', Date.now());
+                })
+                .catch(error => {
+                    console.error('获取一言失败:', error);
+                    hitokotoEl.innerText = '「生活就像海洋，只有意志坚强的人才能到达彼岸」';
+                });
+                
+            function updateHitokoto(data) {
+                hitokotoEl.href = `https://hitokoto.cn/?uuid=${data.uuid}`;
+                let text = data.hitokoto;
+                if (data.from) text += ' —— ' + data.from;
+                hitokotoEl.innerText = text;
+            }
+        });
+    </script>
+
+    <script src="/js/main.js"></script>
+    <!-- giscus评论系统 -->
+    
+    <script src="https://giscus.app/client.js"
+        data-repo="Sunshine6153/blog-giscus"
+        data-repo-id="R_kgDOO3-z1g"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOO3-z1s4CrLm3"
+        data-mapping="pathname"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+    </script>
+    
+</body>
+</html>

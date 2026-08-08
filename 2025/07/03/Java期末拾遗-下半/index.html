@@ -1,0 +1,533 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>Java期末拾遗-下半 | Sunshine的博客</title>
+    <meta name="author" content="Sunshine" />
+    <meta name="description" content="记录日常的收获和发电" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    <style>
+        /* 新增：一言容器的CSS样式 */
+        #hitokoto {
+            text-align: center;
+            margin: 2rem 0 1rem 0;
+            padding: 1.5rem;
+            font-size: 1.1rem;
+            color: #666;
+            border-top: 1px dashed rgba(0,0,0,0.1);
+            border-bottom: 1px dashed rgba(0,0,0,0.1);
+            background: rgba(250,250,250,0.5);
+            border-radius: 8px;
+        }
+        #hitokoto a {
+            font-style: italic;
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s;
+        }
+        #hitokoto a:hover {
+            color: #333;
+        }
+    </style>
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <!-- 鼠标点击特效 -->
+    <canvas
+        id="fireworks"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 32767"
+    ></canvas>
+    <script src="https://s4.zstatic.net/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="/js/fireworks.min.js"></script>
+
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>SUNSHINE的博客</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/projects">
+            <i class="fa-solid fa-diagram-project fa-fw"></i>
+            <span>&ensp;Projects</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;SUNSHINE的博客</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/projects">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-diagram-project fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Projects</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>Java期末拾遗-下半</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/7/3
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9B%B8%E5%85%B3/" style="color: #03a9f4">
+                    计算机相关
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <p>1.编译器和解释器的区别<br>编译器是“一次性翻译，整体执行”，解释器是“一边翻译，一边执行”。<br>对比图（改自GPT）：</p>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>编译器（Compiler）</th>
+<th>解释器（Interpreter）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>翻译方式</td>
+<td><strong>一次性</strong>将整个源代码编译成可执行文件</td>
+<td><strong>逐行解释</strong>源代码并立即执行</td>
+</tr>
+<tr>
+<td>输出结果</td>
+<td>可执行文件（如 <code>.exe</code>、<code>.class</code> 等）</td>
+<td>无独立可执行文件，直接运行</td>
+</tr>
+<tr>
+<td>执行效率</td>
+<td>高（编译后运行快）</td>
+<td>较低（每次运行都要解释）</td>
+</tr>
+<tr>
+<td>调试方便程度</td>
+<td>不易定位具体错误行（需要整个编译过程）</td>
+<td>容易定位（出错立即停止）</td>
+</tr>
+<tr>
+<td>第一次运行速度</td>
+<td>慢（需要先编译）</td>
+<td>快（直接运行）</td>
+</tr>
+<tr>
+<td>依赖环境</td>
+<td>编译后可独立运行，不再依赖编译器</td>
+<td>每次运行都依赖解释器</td>
+</tr>
+<tr>
+<td>常见语言</td>
+<td>C、C++、Java（先编译成字节码）</td>
+<td>Python、JavaScript、Ruby</td>
+</tr>
+</tbody></table>
+<p>需要注意的是：Java既是编译型又是解释型语言。<br>这句话看起来矛盾，其实是因为 Java 有两个阶段的执行过程，结合了编译型语言和解释型语言的特点。<br>第一步：编译（Compiler）<br>Java 源代码（.java 文件）会先被 编译器（javac） 编译成 字节码文件（.class），这个过程是一次性编译，类似于 C、C++ 的编译阶段。<br>第二步：解释（Interpreter）或即时编译（JIT）<br>编译后的 .class 文件不是直接执行的，而是由 Java 虚拟机（JVM） 来运行：<br>JVM 内部会用 解释器 把字节码一行一行“翻译”成机器指令并执行。<br>同时，JVM 的 JIT（Just-In-Time）编译器 会把频繁执行的字节码“临时编译”为本地机器码，提高效率。</p>
+<p>2.static变量<br>static 变量（也叫静态变量），是属于类（class）而不是对象（object）的变量。<br>static能够修饰成员变量和方法，内部类，也可以形成静态static代码块，不能修饰局部变量。<br>静态代码块：定义在成员位置，使用static修饰的代码块{}，随着类的加载而执行，且执行一次，优先于main方法和构造方法的执行。<br>static 变量在内存中只存在一份，它是随着类的加载而加载的，且只加载一次。例如：<br>Java 程序的入口方法 main是一个 static（静态）方法。</p>
+<pre><code class="language-java">public static void main(String[] args)&#123;&#125;
+</code></pre>
+<p>它优先于对象存在，所以，可以被所有对象共享。<br>需要注意的是：静态方法不能访问非静态变量，因为它没有 this 对象。<br>静态方法在没有任何对象的情况下就可以被调用，而非静态变量属于某个对象，必须通过 this 才能访问。<br>this 代表当前对象的引用，而静态方法属于类本身，不属于任何对象，所以它没有 this。</p>
+<pre><code class="language-java">static void print() &#123;
+    System.out.println(name); // ❌ 错误，name 是非静态变量
+&#125;
+</code></pre>
+<p>3.多态、重写与重载<br>重写：<br>重写是实现多态的必要前提之一。<br>子类出现重名的成员方法(返回值类型，方法名和参数列表都相同)，访问是特殊情况，声明不变，将父类方法重新实现。<br>需要注意：1.子类方法覆盖父类方法，返回值类型、函数名和参数列表都要一模一样。<br>         2.子类方法覆盖父类方法，必须要保证权限大于等于父类权限（例如父类是 public，子类不能是 protected），<br>           子类抛出的异常不能比父类方法更宽泛。<br>例如：</p>
+<pre><code class="language-java">class Animal &#123;
+    void makeSound() &#123;
+        System.out.println(&quot;Animal sound&quot;);
+    &#125;
+&#125;
+
+class Dog extends Animal &#123;
+    @Override
+    void makeSound() &#123;
+        System.out.println(&quot;Bark&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>重载：<br>在一个类中方法名相同，但参数不同（类型或个数），返回类型可以相同或不同的多个方法。</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>是否需要继承</td>
+<td>无需继承，可在同一个类中定义</td>
+</tr>
+<tr>
+<td>方法名</td>
+<td>相同</td>
+</tr>
+<tr>
+<td>参数列表</td>
+<td>必须不同（类型、数量或顺序不同）</td>
+</tr>
+<tr>
+<td>返回类型</td>
+<td>可以不同，但不能靠返回类型区分方法</td>
+</tr>
+</tbody></table>
+<p>例如：</p>
+<pre><code class="language-java">class Calculator &#123;
+    int add(int a, int b) &#123;
+        return a + b;
+    &#125;
+
+    double add(double a, double b) &#123;
+        return a + b;
+    &#125;
+
+    int add(int a, int b, int c) &#123;
+        return a + b + c;
+    &#125;
+&#125;
+</code></pre>
+<p>需要注意的是：Java支持构造函数重载（Constructor Overloading），即一个类可以有多个构造函数，只要它们的参数列表不同（参数类型、顺序或数量不同）。<br>多态：<br>多态是指同一行为，具有多个不同的表现形式。<br>即父类定义了一个方法，而子类方法重写该方法时方法主体不一样，<br>这样在不同子类里面这个方法的实现形式就不一样，能让程序更有扩展性。<br>需要注意：当使用多态方式调用方法时，首先检查父类中是否有该方法，如果没有，则编译错误，不能调用子类拥有，而父类没有的方法。想要调用子类特有的方法，必须做向下转型。<br>多态例如：</p>
+<pre><code class="language-java">class Animal &#123;
+    void makeSound() &#123; &#125;
+&#125;
+
+class Dog extends Animal &#123;
+    @Override
+    void makeSound() &#123;  //对于Cat子类,makeSound方法是Bark
+        System.out.println(&quot;Bark&quot;);
+    &#125;
+&#125;
+
+class Cat extends Animal &#123;
+    @Override
+    void makeSound() &#123;  //对于Cat子类,makeSound方法是Hajimi
+        System.out.println(&quot;Hajimi&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>4.关系<br>在画类图的时候，”is-a” 和 “has-a” 是两种最基础的关系。</p>
+<ol>
+<li>“is-a” 关系（继承&#x2F;实现），包括子类 继承 父类，或类 实现 接口。<br> 继承（类 → 类）：空心三角箭头（子类指向父类），如：Dog ──────▷ Animal<br> 实现（类 → 接口）：虚线空心三角箭头 或 棒棒糖表示法，如：<br> Dog ⤍ «interface» Runnable或Dog ───○ Runnable</li>
+<li>“has-a” 关系（组合&#x2F;聚合&#x2F;关联），表示一个类包含另一个类的对象。<br>组合（Composition）：强依赖，部分不能脱离整体存在（如 Car 和 Engine）。<br>聚合（Aggregation）：弱依赖，部分可以独立存在（如 University 和 Department）。<br>关联（Association）：普通的持有关系（如 Student 和 Course）。<table>
+<thead>
+<tr>
+<th>关系类型</th>
+<th>符号</th>
+<th>示例</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>组合</td>
+<td>实心菱形 ◆──</td>
+<td>Car ◆── Engine</td>
+<td>生命周期绑定，强依赖</td>
+</tr>
+<tr>
+<td>聚合</td>
+<td>空心菱形 ◇──</td>
+<td>University ◇── Department</td>
+<td>生命周期独立，弱依赖</td>
+</tr>
+<tr>
+<td>关联</td>
+<td>实线箭头 ───&gt;</td>
+<td>Student ───&gt; Course</td>
+<td>普通持有关系</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<p>  5.java易忘英语单词汇总<br>  inherit 继承 subclass（child class）子类  equivalent 等价的、同义的<br>  signature 署名 coexist 共存 invoke 调用 instantiate 实例化 abnormalities紊乱<br>  execute 执行 exception handler 异常处理器  stack trace 堆栈跟踪<br>  scope 作用域 wrapper 包装 instance 实例 arguments 参数 集合Collection<br>  accommodate 为…提供空间  aggregation 聚合关系 index 索引（下标）<br>  attribute 属性</p>
+<p>  6.访问权限问题<br>  对于父类来说：<br>  private：仅当前类可访问（子类和其他类均不可见）。<br>  default（包私有）：同一包内的类可访问（子类如果在不同包则不能访问！）。<br>  protected：同一包内的类 + 不同包的子类可访问。<br>  public：所有类均可访问。</p>
+<p>  7.java文件中的注释问题</p>
+<table>
+<thead>
+<tr>
+<th>注释类型</th>
+<th>语法</th>
+<th>用途</th>
+<th>是否生成 Javadoc</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>单行注释</strong></td>
+<td><code>//</code></td>
+<td>临时注释或简短说明</td>
+<td>❌ 否</td>
+</tr>
+<tr>
+<td><strong>多行注释</strong></td>
+<td><code>/* ... */</code></td>
+<td>跨行注释，适合较长说明</td>
+<td>❌ 否</td>
+</tr>
+<tr>
+<td><strong>Javadoc</strong></td>
+<td><code>/** ... */</code></td>
+<td>生成 API 文档（含 <code>@param</code> 等标签）</td>
+<td>✅ 是</td>
+</tr>
+</tbody></table>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+
+            <!-- 一言展示区（页脚上方） -->
+            <div id="hitokoto">
+                <a href="#" id="hitokoto_text">:D 加载中...</a>
+            </div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 Sunshine的博客
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Sunshine
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+
+    <!-- 一言API脚本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hitokotoEl = document.getElementById('hitokoto_text');
+            
+            // 从缓存读取一言（如果有）
+            const cachedHitokoto = localStorage.getItem('hitokoto');
+            const cacheTime = localStorage.getItem('hitokoto_time');
+            
+            // 如果缓存存在且未过期（1分钟）
+            if (cachedHitokoto && cacheTime && Date.now() - cacheTime < 60000) {
+                try {
+                    const data = JSON.parse(cachedHitokoto);
+                    updateHitokoto(data);
+                    return;
+                } catch (e) {
+                    console.log('缓存解析失败，重新获取');
+                }
+            }
+            
+            // 从API获取新的一言
+            fetch('https://v1.hitokoto.cn/?c=a&encode=json&charset=utf-8')
+                .then(response => response.json())
+                .then(data => {
+                    updateHitokoto(data);
+                    // 缓存到本地
+                    localStorage.setItem('hitokoto', JSON.stringify(data));
+                    localStorage.setItem('hitokoto_time', Date.now());
+                })
+                .catch(error => {
+                    console.error('获取一言失败:', error);
+                    hitokotoEl.innerText = '「生活就像海洋，只有意志坚强的人才能到达彼岸」';
+                });
+                
+            function updateHitokoto(data) {
+                hitokotoEl.href = `https://hitokoto.cn/?uuid=${data.uuid}`;
+                let text = data.hitokoto;
+                if (data.from) text += ' —— ' + data.from;
+                hitokotoEl.innerText = text;
+            }
+        });
+    </script>
+
+    <script src="/js/main.js"></script>
+    <!-- giscus评论系统 -->
+    
+    <script src="https://giscus.app/client.js"
+        data-repo="Sunshine6153/blog-giscus"
+        data-repo-id="R_kgDOO3-z1g"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOO3-z1s4CrLm3"
+        data-mapping="pathname"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+    </script>
+    
+</body>
+</html>
